@@ -1,0 +1,24 @@
+h1 {
+    color: rgba(47, 47, 192, 0.868);
+  }
+
+li {
+    color: green;
+}
+
+li {
+    list-style-type: none;
+}
+
+.special {
+    color: orange;
+    font-weight: bold;
+}
+
+a:link {
+    color: pink;
+}
+  
+a:visited {
+    color: green;
+}
