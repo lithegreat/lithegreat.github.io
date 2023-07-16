@@ -47,6 +47,21 @@
       <iframe 
       src="https://player.bilibili.com/player.html?aid=614058434&bvid=BV1Zh4y1x7RL&cid=1142285593&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="1280" height="720"> 
       </iframe>
+      <h1>猜数字</h1>
+
+      <p>我们在1到100之间随机选择了一个数字。看看您是否能在10个回合或更短时间内猜出它。如果您的猜测过高或过低，我们会告诉您。</p>
+
+      <div class="form">
+        <label for="guessField">Enter a guess: </label>
+        <input type="number" min="1" max="100" required id="guessField" class="guessField">
+        <input type="submit" value="Submit guess" class="guessSubmit">
+      </div>
+
+      <div class="resultParas">
+        <p class="guesses"></p>
+        <p class="lastResult"></p>
+        <p class="lowOrHi"></p>
+      </div>
     </main>
     <aside>
       <p>还没想好写啥</p>
