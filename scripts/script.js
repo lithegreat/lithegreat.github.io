@@ -1,6 +1,6 @@
 function createHeadgraph() {
     let head = document.createElement('h1');
-    head.textContent = '你点击了这个按钮！';
+    head.textContent = '你点击了这个按钮！猫猫很开心！';
     document.body.appendChild(head);
 }
   
