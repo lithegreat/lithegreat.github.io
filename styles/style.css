@@ -1,7 +1,3 @@
-h1 {
-    color: rgba(47, 47, 192, 0.868);
-  }
-
 li {
     color: green;
 }
@@ -37,3 +33,17 @@ a:hover {
   background-color: rebeccapurple;
   color: white;
 }
+
+body {
+    background-color: rgba(136, 216, 225, 0.938);
+    
+}
+
+h1 {
+    color: #375e97;
+    border-bottom: 5px solid #375e97;
+}
+
+/*p{
+    border: 3px solid #375e97;
+}/*
