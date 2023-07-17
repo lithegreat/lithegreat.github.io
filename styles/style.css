@@ -1,49 +1,116 @@
-li {
-    color: green;
-}
-
-li {
-    list-style-type: none;
-}
-
-.special {
-    color: orange;
-    font-weight: bold;
-}
-
-a:link {
-    color: pink;
-}
-  
-a:visited {
-    color: green;
-}
-
-a:hover {
-    text-decoration: none;
-}
-
-.outer {
-    border: 5px solid black;
-}
-  
-.box {
-  padding: 10px;
-  width: calc(90% - 30px);
-  background-color: rebeccapurple;
-  color: white;
-}
-
+/* 设置整个网页的字体和背景颜色，并创建左右间距 */
 body {
-    background-color: rgba(136, 216, 225, 0.938);
-    
-}
-
-h1 {
-    color: #375e97;
-    border-bottom: 5px solid #375e97;
-}
-
-/*p{
-    border: 3px solid #375e97;
-}/*
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    margin: 0 20px; /* 添加左右间距 */
+  }
+  
+  /* 设置网页的标题样式 */
+  h1, h2, h3, h4, h5, h6 {
+    color: #ffffff; /* 标题文字颜色 */
+    padding: 10px; /* 标题内边距 */
+    margin-top: 20px;
+  }
+  
+  h1 {
+    font-size: 28px;
+    background-color: #007bff; /* h1 标题背景颜色 */
+  }
+  
+  h2 {
+    font-size: 24px;
+    background-color: #009688; /* h2 标题背景颜色 */
+  }
+  
+  h3 {
+    font-size: 20px;
+    background-color: #f44336; /* h3 标题背景颜色 */
+  }
+  
+  h4 {
+    font-size: 18px;
+    background-color: #673ab7; /* h4 标题背景颜色 */
+  }
+  
+  h5 {
+    font-size: 16px;
+    background-color: #ffc107; /* h5 标题背景颜色 */
+  }
+  
+  h6 {
+    font-size: 14px;
+    background-color: #3f51b5; /* h6 标题背景颜色 */
+  }
+  
+  /* 设置段落的样式 */
+  p {
+    font-size: 16px;
+    color: #666666;
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+  
+  /* 设置段落和标题之间的分割线 */
+  p + h1,
+  p + h2,
+  p + h3,
+  p + h4,
+  p + h5,
+  p + h6 {
+    border-top: 1px solid #dddddd; /* 添加段落和标题之间的分割线 */
+    padding-top: 10px; /* 分割线上方的内边距 */
+  }
+  
+  /* 设置链接的样式 */
+  a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  /* 设置图片的样式 */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* 设置列表的样式 */
+  ul {
+    list-style-type: disc;
+    margin-left: 20px;
+  }
+  
+  /* 设置表格的样式 */
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+  
+  /* 设置按钮的样式 */
+  button {
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
