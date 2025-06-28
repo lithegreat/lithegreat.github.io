@@ -1,35 +1,49 @@
-# personal-website
+# Personal Website of Hengsheng Li
 
-This template should help get you started developing with Vue 3 in Vite.
+This is a personal website project built using Vue.js and Vite. It serves as a portfolio to showcase my work, skills, and personal information.
 
-## Recommended IDE Setup
+## Features
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+- **Home Page**: Displays an overview of your portfolio.
+- **Header and Footer**: Reusable components for navigation and footer content.
+- **Routing**: Managed using Vue Router.
+- **Styling**: Custom styles defined in `style.css`.
 
-## Customize configuration
+## Installation
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+1. Clone the repository:
 
-## Project Setup
+   ```bash
+   git clone https://github.com/lithegreat/lithegreat.github.io
+   ```
 
-```sh
-npm install
-```
+2. Navigate to the project directory:
 
-### Compile and Hot-Reload for Development
+   ```bash
+   cd lithegreat.github.io
+   ```
 
-```sh
-npm run dev
-```
+3. Install dependencies:
 
-### Compile and Minify for Production
+   ```bash
+   npm install
+   ```
 
-```sh
+4. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+## Build
+
+To build the project for production:
+
+```bash
 npm run build
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+## Deploy the `dist` folder to [GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site#publishing-from-a-branch)
 
-```sh
-npm run lint
+```bash
+npx gh-pages -d dist
 ```
