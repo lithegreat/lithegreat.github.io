@@ -1,4 +1,4 @@
-# Personal Website of Hengsheng Li
+# Personal Website of [Hengsheng Li](https://lithegreat.github.io/)
 
 This is a personal website project built using Vue.js and Vite. It serves as a portfolio to showcase my work, skills, and personal information.
 
