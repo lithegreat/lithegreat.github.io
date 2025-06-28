@@ -4,7 +4,7 @@ This is a personal website project built using Vue.js and Vite. It serves as a p
 
 ## Features
 
-- **Home Page**: Displays an overview of your portfolio.
+- **Home Page**: Displays an overview of the portfolio.
 - **Header and Footer**: Reusable components for navigation and footer content.
 - **Routing**: Managed using Vue Router.
 - **Styling**: Custom styles defined in `style.css`.
