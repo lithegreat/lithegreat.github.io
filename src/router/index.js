@@ -7,7 +7,7 @@ const routes = [
     name: 'home',
     component: HomeView,
     meta: {
-      title: 'Hengsheng Li | TUM ECE Student',
+      title: 'Hengsheng Li',
     },
   },
 ]
