@@ -2,7 +2,6 @@ import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [vue()],
   resolve: {
@@ -11,7 +10,7 @@ export default defineConfig({
     },
   },
   base:
-    process.env.NODE_ENV === 'production'
+    import.meta.env && import.meta.env.MODE === 'production'
       ? '/lithegreat.github.io/' // 替换为你的仓库名
       : '/',
 })
