@@ -9,8 +9,5 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
-  base:
-    import.meta.env && import.meta.env.MODE === 'production'
-      ? '/lithegreat.github.io/' // 替换为你的仓库名
-      : '/',
+  base: '/',
 })
