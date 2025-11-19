@@ -1,61 +1,93 @@
 <script setup>
+import { useLanguage } from '@/composables/useLanguage'
+const { cvData } = useLanguage()
 const currentYear = new Date().getFullYear()
 </script>
 
 <template>
-  <footer class="bg-dark text-white py-5">
+  <footer>
     <div class="container-custom">
-      <div class="row gy-4">
-        <div class="col-lg-4">
-          <h4 class="mb-4">Hengsheng Li</h4>
-          <p class="mb-0">
-            Master's Student in Electrical Engineering and Information Technology at Technical
-            University of Munich
-          </p>
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>{{ cvData.name }}</h4>
+          <p>{{ cvData.title }} at {{ cvData.education[0].institution }}</p>
         </div>
 
-        <div class="col-lg-4">
-          <h4 class="mb-4">Contact</h4>
-          <p class="mb-1"><i class="fas fa-envelope me-2"></i>muzimichaed@gmail.com</p>
-          <p><i class="fas fa-map-marker-alt me-2"></i>Munich, Germany</p>
+        <div class="footer-section">
+          <h4>{{ cvData.ui.footer.contact }}</h4>
+          <p><i class="fas fa-envelope"></i> {{ cvData.email }}</p>
+          <p><i class="fas fa-map-marker-alt"></i> {{ cvData.location }}</p>
         </div>
 
-        <div class="col-lg-4">
-          <h4 class="mb-4">Connect</h4>
-          <div class="d-flex gap-3">
-            <a
-              href="https://www.linkedin.com/in/hengsheng-li/"
-              target="_blank"
-              class="text-white fs-4"
-            >
+        <div class="footer-section">
+          <h4>{{ cvData.ui.footer.connect }}</h4>
+          <div class="social-links">
+            <a :href="cvData.socials.linkedin" target="_blank" aria-label="LinkedIn">
               <i class="fab fa-linkedin"></i>
             </a>
-            <a href="https://github.com/lithegreat" target="_blank" class="text-white fs-4">
+            <a :href="cvData.socials.github" target="_blank" aria-label="GitHub">
               <i class="fab fa-github"></i>
             </a>
-            <!-- <a href="https://x.com" target="_blank" class="text-white fs-4">
-              <i class="fab fa-x-twitter"></i>
-            </a> -->
           </div>
         </div>
       </div>
 
-      <hr class="my-4 bg-light" />
-
-      <div class="text-center">
-        <p class="mb-0">&copy; {{ currentYear }} Hengsheng Li. All Rights Reserved.</p>
+      <div class="footer-bottom">
+        <p>&copy; {{ currentYear }} {{ cvData.name }}. {{ cvData.ui.footer.rights }}</p>
       </div>
     </div>
   </footer>
 </template>
 
 <style scoped>
-footer a {
+footer {
+  background-color: var(--bg-surface);
+  padding: 60px 0 30px;
+  border-top: 1px solid var(--border-color);
+  color: var(--text-muted);
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.footer-section h4 {
+  color: var(--text-main);
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.footer-section p {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.social-links {
+  display: flex;
+  gap: 20px;
+}
+
+.social-links a {
+  font-size: 1.5rem;
+  color: var(--text-muted);
   transition: all 0.3s ease;
 }
 
-footer a:hover {
-  color: var(--primary) !important;
+.social-links a:hover {
+  color: var(--primary);
   transform: translateY(-3px);
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 30px;
+  border-top: 1px solid var(--border-color);
+  font-size: 0.9rem;
 }
 </style>

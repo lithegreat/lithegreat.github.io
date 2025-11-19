@@ -1,199 +1,78 @@
 <script setup>
 import { ref, onMounted } from 'vue'
+import { useLanguage } from '@/composables/useLanguage'
 
-// 响应式数据
-const skills = ref([
-  {
-    category: 'Programming Languages',
-    items: ['Python', 'C', 'C++'],
-  },
-  {
-    category: 'Tools & Technologies',
-    items: ['Git', 'Bash', 'Linux', 'Continuous Integration (CI/CD)', 'Unit Testing'],
-  },
-  {
-    category: 'Hardware Knowledge',
-    items: ['Digital Design', 'VHDL', 'RISC-V Custom Instruction Extension'],
-  },
-  {
-    category: 'Languages',
-    items: ['English (Fluent)', 'German (Fluent, C1)', 'Chinese (Native)'],
-  },
-])
-
-const projects = ref([
-  {
-    title: 'Evaluation of OpenASIP Custom Operations in CoreDSL Ecosystem',
-    type: 'Bachelor Thesis',
-    points: [
-      'Extended a RISC-V instruction set by implementing custom operations in C and Python on Linux systems',
-      'Automated data extraction and analysis workflows using Python and Bash scripting',
-      'Gained hands-on experience with embedded processor simulation and benchmarking',
-    ],
-  },
-  {
-    title: 'Asynchronous Transfer Mode Implementation',
-    type: 'VHDL Lab',
-    points: [
-      'Developed and simulated ATM components, ensuring proper data transmission through asynchronous communication',
-      'Synthesized the VHDL models into gate-level netlists, validating functionality in hardware environments',
-    ],
-  },
-  {
-    title: 'Embedded System Design for Machine Learning',
-    type: 'Embedded ML Project',
-    points: [
-      'Trained a lightweight keyword spotting (KWS) neural network using TensorFlow/Keras',
-      'Quantized and deployed the model using MicroTVM and ESP-IDF on embedded devices',
-      'Implemented ROM/RAM/MACs estimation tools and model evaluation metrics in Python',
-      'Extended embedded C++ code for real-time posterior processing and parameter tuning',
-      'Developed an efficient 8-bit vectorized multiplier module in VHDL',
-    ],
-  },
-  {
-    title: 'Multidimensional IMU Data Analysis and Visualization',
-    type: 'Research Internship',
-    points: [
-      'Processed and analyzed high-dimensional IMU sensor data using Python and scientific libraries',
-      'Developed custom data visualization tools to study motion patterns and sensor relationships',
-      'Gained experience in time-series data processing, feature extraction, and visualization with Matplotlib/Seaborn',
-    ],
-  },
-  {
-    title: 'Geometric Library Maintenance',
-    type: 'Software Engineering Praktikum',
-    points: [
-      'Refactored a C++ geometric computation library and integrated automated unit testing',
-      'Set up CI/CD pipelines using GitLab to ensure code quality and continuous integration',
-      'Enhanced version control practices using Git under a Linux development environment',
-    ],
-  },
-  {
-    title: 'Music Video Generation Automation',
-    type: 'Personal Project',
-    points: [
-      'Developed a Python-based automation tool by integrating open-source AI models',
-      'Focused on automating media processing tasks and improving operational efficiency',
-    ],
-  },
-])
-
+const { cvData } = useLanguage()
 const isVisible = ref(false)
 
 onMounted(() => {
-  // 动画触发
   setTimeout(() => {
     isVisible.value = true
-  }, 300)
+  }, 100)
 })
 </script>
 
 <template>
   <main>
     <!-- Hero Section -->
-    <section class="hero d-flex align-items-center">
-      <div class="container-custom">
-        <div class="row align-items-center gy-5">
-          <div class="col-lg-6" :class="{ 'fade-in-left': isVisible }">
-            <h1 class="display-3 fw-bold mb-4">
-              Hi, I'm <span class="text-gradient">Hengsheng Li</span>
-            </h1>
-            <h2 class="h3 mb-4">M.Sc. Electrical Engineering and Information Technology</h2>
-            <p class="lead mb-5">
-              Graduate Student at Technical University of Munich | Working Student at Infineon
-              Technologies
-            </p>
-            <div class="d-flex gap-3">
-              <a href="#about" class="btn btn-primary btn-lg px-4 py-3">
-                Learn More <i class="fas fa-arrow-down ms-2"></i>
-              </a>
-              <a href="mailto:muzimichaed@gmail.com" class="btn btn-outline-dark btn-lg px-4 py-3">
-                Contact Me
-              </a>
-            </div>
+    <section class="hero">
+      <div class="container-custom hero-content">
+        <div class="hero-text" :class="{ 'fade-in-up': isVisible }">
+          <span class="greeting">{{ cvData.ui.hero.greeting }}</span>
+          <h1 class="name">
+            {{ cvData.name.split(' ')[0] }}
+            <span class="text-gradient">{{ cvData.name.split(' ')[1] }}</span>
+          </h1>
+          <h2 class="title">{{ cvData.title }}</h2>
+          <p class="description">
+            {{ cvData.description }}
+          </p>
+          <div class="cta-buttons">
+            <a href="#projects" class="btn btn-primary">{{ cvData.ui.hero.btnProject }}</a>
+            <a :href="`mailto:${cvData.email}`" class="btn btn-outline">{{
+              cvData.ui.hero.btnContact
+            }}</a>
           </div>
-          <div class="col-lg-6 text-center" :class="{ 'fade-in-right': isVisible }">
-            <div class="profile-image-container mx-auto">
-              <div class="profile-image">
-                <img src="@/assets/images/profile.jpg" alt="Profile Image" class="img-fluid rounded-circle" />
-              </div>
-              <div class="decoration-circle"></div>
-              <div class="decoration-dots"></div>
-            </div>
+        </div>
+        <div class="hero-image" :class="{ 'fade-in-up': isVisible }" style="animation-delay: 0.2s">
+          <div class="image-wrapper">
+            <img src="@/assets/images/profile.jpg" :alt="cvData.name" />
           </div>
         </div>
       </div>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="section-padding bg-white">
+    <section id="about" class="section-padding">
       <div class="container-custom">
-        <div class="row justify-content-center">
-          <div class="col-xl-8 col-lg-10">
-            <div class="section-header text-center mb-5">
-              <h2 class="display-5 fw-bold mb-3">About Me</h2>
-              <div class="divider mx-auto"></div>
-            </div>
+        <div class="section-header">
+          <h2>{{ cvData.ui.about.title }}</h2>
+          <div class="divider"></div>
+        </div>
 
-            <div class="card border-0 shadow-lg mb-5">
-              <div class="card-body p-4 p-lg-5">
-                <div class="d-flex align-items-center mb-4">
-                  <div class="icon-box bg-primary me-4">
-                    <i class="fas fa-graduation-cap fa-2x text-white"></i>
-                  </div>
-                  <h3 class="mb-0">Education</h3>
-                </div>
-
-                <div class="timeline">
-                  <div class="timeline-item">
-                    <h4 class="mb-1">Technical University of Munich (TUM)</h4>
-                    <p class="text-primary fw-medium mb-1">
-                      Master of Science in Electrical Engineering and Information Technology
-                    </p>
-                    <p class="text-muted mb-2">04.2025 – Present</p>
-                  </div>
-
-                  <div class="timeline-item">
-                    <h4 class="mb-1">Technical University of Munich (TUM)</h4>
-                    <p class="text-primary fw-medium mb-1">
-                      Bachelor of Science in Electrical Engineering and Information Technology
-                    </p>
-                    <p class="text-muted mb-2">10.2021 – 03.2025 | GPA: 2.1/1.0</p>
-                    <p class="mb-0">
-                      Relevant Coursework: System-on-Chip, Embedded Systems & Security, Software
-                      Engineering Lab, VHDL Lab, Python for Engineering Data Analysis, Digital
-                      Circuits, Embedded System Design for Machine Learning
-                    </p>
-                  </div>
-                </div>
+        <div class="about-grid">
+          <div class="about-card">
+            <div class="card-icon"><i class="fas fa-graduation-cap"></i></div>
+            <h3>{{ cvData.ui.about.education }}</h3>
+            <div class="timeline">
+              <div v-for="(edu, index) in cvData.education" :key="index" class="timeline-item">
+                <span class="date">{{ edu.date }}</span>
+                <h4>{{ edu.degree }}</h4>
+                <p class="institution">{{ edu.institution }}</p>
+                <p v-if="edu.gpa" class="gpa">{{ edu.gpa }}</p>
               </div>
             </div>
+          </div>
 
-            <div class="card border-0 shadow-lg">
-              <div class="card-body p-4 p-lg-5">
-                <div class="d-flex align-items-center mb-4">
-                  <div class="icon-box bg-primary me-4">
-                    <i class="fas fa-briefcase fa-2x text-white"></i>
-                  </div>
-                  <h3 class="mb-0">Experience</h3>
-                </div>
-
-                <div class="timeline">
-                  <div class="timeline-item">
-                    <h4 class="mb-1">Infineon Technologies AG</h4>
-                    <p class="text-primary fw-medium mb-1">
-                      Working Student - Hardware Development
-                    </p>
-                    <p class="text-muted mb-2">June 2025 - Present</p>
-                    <ul class="mb-0">
-                      <li>
-                        Improve workflows for hardware CI/CD (Continuous Integration/Continuous
-                        Deployment)
-                      </li>
-                      <li>Tools and Languages: Python, Git, Jenkins</li>
-                    </ul>
-                  </div>
-                </div>
+          <div class="about-card">
+            <div class="card-icon"><i class="fas fa-briefcase"></i></div>
+            <h3>{{ cvData.ui.about.experience }}</h3>
+            <div class="timeline">
+              <div v-for="(job, index) in cvData.experience" :key="index" class="timeline-item">
+                <span class="date">{{ job.date }}</span>
+                <h4>{{ job.role }}</h4>
+                <p class="institution">{{ job.company }}</p>
+                <p class="desc">{{ job.description }}</p>
               </div>
             </div>
           </div>
@@ -202,32 +81,21 @@ onMounted(() => {
     </section>
 
     <!-- Skills Section -->
-    <section id="skills" class="section-padding bg-light">
+    <section id="skills" class="section-padding bg-surface">
       <div class="container-custom">
-        <div class="section-header text-center mb-5">
-          <h2 class="display-5 fw-bold mb-3">Technical Skills</h2>
-          <div class="divider mx-auto"></div>
+        <div class="section-header">
+          <h2>{{ cvData.ui.skills.title }}</h2>
+          <div class="divider"></div>
         </div>
 
-        <div class="row g-4">
-          <div
-            v-for="(skillGroup, index) in skills"
-            :key="skillGroup.category"
-            class="col-lg-3 col-md-6"
-          >
-            <div
-              class="card h-100 border-0 shadow-sm skill-card"
-              :class="{ 'fade-in': isVisible }"
-              :style="{ 'transition-delay': `${index * 100}ms` }"
-            >
-              <div class="card-body p-4">
-                <h3 class="h5 mb-3 text-primary">{{ skillGroup.category }}</h3>
-                <ul class="skill-list">
-                  <li v-for="item in skillGroup.items" :key="item">
-                    <i class="fas fa-check-circle text-success me-2"></i>{{ item }}
-                  </li>
-                </ul>
-              </div>
+        <div class="skills-grid">
+          <div v-for="group in cvData.skills" :key="group.category" class="skill-card">
+            <div class="skill-header">
+              <i :class="group.icon"></i>
+              <h3>{{ group.category }}</h3>
+            </div>
+            <div class="skill-tags">
+              <span v-for="item in group.items" :key="item" class="skill-tag">{{ item }}</span>
             </div>
           </div>
         </div>
@@ -237,29 +105,25 @@ onMounted(() => {
     <!-- Projects Section -->
     <section id="projects" class="section-padding">
       <div class="container-custom">
-        <div class="section-header text-center mb-5">
-          <h2 class="display-5 fw-bold mb-3">Project Experience</h2>
-          <div class="divider mx-auto"></div>
-          <p class="lead mx-auto mt-4" style="max-width: 700px">
-            Hands-on projects in embedded systems, hardware design, and software development
-          </p>
+        <div class="section-header">
+          <h2>{{ cvData.ui.projects.title }}</h2>
+          <div class="divider"></div>
         </div>
 
-        <div class="row g-4">
-          <div v-for="(project, index) in projects" :key="project.title" class="col-lg-6">
-            <div
-              class="card h-100 border-0 shadow-sm project-card"
-              :class="{ 'fade-in': isVisible }"
-              :style="{ 'transition-delay': `${index * 100}ms` }"
-            >
-              <div class="card-body p-4">
-                <h3 class="h4 mb-3">{{ project.title }}</h3>
-                <div class="badge bg-primary mb-3">{{ project.type }}</div>
-                <ul class="project-points">
-                  <li v-for="(point, pIndex) in project.points" :key="pIndex">
-                    {{ point }}
-                  </li>
-                </ul>
+        <div class="projects-grid">
+          <div v-for="project in cvData.projects" :key="project.title" class="project-card">
+            <div class="project-content">
+              <div class="project-header">
+                <span class="project-type">{{ project.type }}</span>
+                <h3>{{ project.title }}</h3>
+              </div>
+              <ul class="project-points">
+                <li v-for="(point, i) in project.points" :key="i">{{ point }}</li>
+              </ul>
+            </div>
+            <div class="project-footer">
+              <div class="project-tags">
+                <span v-for="tag in project.tags" :key="tag" class="tag">{{ tag }}</span>
               </div>
             </div>
           </div>
@@ -270,218 +134,331 @@ onMounted(() => {
 </template>
 
 <style scoped>
+/* Hero Section */
 .hero {
   min-height: 100vh;
-  background: linear-gradient(135deg, #f5f7fa 0%, #e4edf9 100%);
+  display: flex;
+  align-items: center;
   padding-top: 80px;
-}
-
-.profile-image-container {
   position: relative;
-  width: 350px;
-  height: 350px;
-}
-
-.profile-image {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background: linear-gradient(45deg, #6a11cb 0%, #2575fc 100%);
-  z-index: 2;
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
 }
 
-/* .initials {
-  font-size: 5rem;
-  font-weight: 700;
-  color: white;
-  opacity: 0.8;
-} */
-
-.decoration-circle {
-  position: absolute;
-  top: -20px;
-  right: -20px;
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  border: 15px solid var(--primary);
-  z-index: 1;
-}
-
-.decoration-dots {
-  position: absolute;
-  bottom: -15px;
-  left: -15px;
-  width: 80px;
-  height: 80px;
-  background-image: radial-gradient(var(--primary) 3px, transparent 3px);
-  background-size: 15px 15px;
-  z-index: 1;
-}
-
-.icon-box {
-  width: 70px;
-  height: 70px;
-  border-radius: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.timeline {
-  position: relative;
-  padding-left: 30px;
-}
-
-.timeline::before {
+.hero::before {
   content: '';
   position: absolute;
-  left: 0;
-  top: 10px;
-  height: calc(100% - 20px);
-  width: 3px;
+  top: -20%;
+  right: -10%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.1) 0%, rgba(0, 0, 0, 0) 70%);
+  z-index: -1;
+}
+
+.hero-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.greeting {
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.name {
+  font-size: 4rem;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 20px;
+  letter-spacing: -0.02em;
+}
+
+.title {
+  font-size: 1.5rem;
+  color: var(--text-main);
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.description {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  margin-bottom: 40px;
+  max-width: 500px;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 20px;
+}
+
+.image-wrapper {
+  position: relative;
+  width: 400px;
+  height: 400px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  border: 2px solid var(--border-color);
+  margin: 0 auto;
+}
+
+.image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Section Headers */
+.section-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.section-header h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.divider {
+  width: 60px;
+  height: 4px;
   background: var(--primary);
+  margin: 0 auto;
+  border-radius: 2px;
+}
+
+/* About Grid */
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 40px;
+}
+
+.about-card {
+  background: var(--bg-surface);
+  padding: 40px;
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+}
+
+.card-icon {
+  width: 50px;
+  height: 50px;
+  background: rgba(56, 189, 248, 0.1);
+  color: var(--primary);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
 }
 
 .timeline-item {
   position: relative;
+  padding-left: 20px;
+  border-left: 2px solid var(--border-color);
   margin-bottom: 30px;
-  padding-left: 30px;
 }
 
-.timeline-item::before {
-  content: '';
-  position: absolute;
-  left: -7px;
-  top: 8px;
-  width: 15px;
-  height: 15px;
-  border-radius: 50%;
-  background: var(--primary);
-  border: 3px solid white;
+.timeline-item:last-child {
+  margin-bottom: 0;
 }
 
-.skill-card,
+.timeline-item .date {
+  font-size: 0.9rem;
+  color: var(--primary);
+  font-weight: 600;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.timeline-item h4 {
+  font-size: 1.1rem;
+  margin-bottom: 5px;
+}
+
+.timeline-item .institution {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+/* Skills Grid */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+}
+
+.skill-card {
+  background: var(--bg-body);
+  padding: 30px;
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+  transition: transform 0.3s ease;
+}
+
+.skill-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--primary);
+}
+
+.skill-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.skill-header i {
+  font-size: 1.5rem;
+  color: var(--primary);
+}
+
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.skill-tag {
+  background: var(--bg-surface);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  border: 1px solid var(--border-color);
+}
+
+/* Projects Grid */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 30px;
+}
+
 .project-card {
-  transition: all 0.5s ease;
-  transform: translateY(30px);
-  opacity: 0;
+  background: var(--bg-surface);
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
 }
 
-.skill-card.fade-in,
-.project-card.fade-in {
-  transform: translateY(0);
-  opacity: 1;
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--primary);
 }
 
-.skill-list {
-  list-style: none;
-  padding-left: 0;
+.project-content {
+  padding: 30px;
+  flex-grow: 1;
 }
 
-.skill-list li {
-  margin-bottom: 12px;
-  padding-left: 28px;
-  position: relative;
+.project-type {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--primary);
+  font-weight: 600;
+  margin-bottom: 10px;
+  display: block;
 }
 
-.skill-list li i {
-  position: absolute;
-  left: 0;
-  top: 5px;
+.project-header h3 {
+  font-size: 1.4rem;
+  margin-bottom: 20px;
+  line-height: 1.4;
 }
 
 .project-points {
   padding-left: 20px;
+  color: var(--text-muted);
+  font-size: 0.95rem;
 }
 
 .project-points li {
-  margin-bottom: 8px;
-  position: relative;
+  margin-bottom: 10px;
+  list-style-type: disc;
 }
 
-.project-points li::before {
-  content: '•';
-  color: var(--primary);
-  font-weight: bold;
-  position: absolute;
-  left: -15px;
+.project-footer {
+  padding: 20px 30px;
+  border-top: 1px solid var(--border-color);
+  background: rgba(0, 0, 0, 0.2);
 }
 
-.divider {
-  height: 4px;
-  width: 80px;
-  background: linear-gradient(90deg, var(--primary), var(--secondary));
-  border-radius: 10px;
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
-/* 动画效果 */
-.fade-in-left {
-  animation: fadeInLeft 0.8s ease forwards;
+.tag {
+  font-size: 0.8rem;
+  color: var(--text-main);
+  background: rgba(255, 255, 255, 0.05);
+  padding: 4px 10px;
+  border-radius: 4px;
 }
 
-.fade-in-right {
-  animation: fadeInRight 0.8s ease forwards;
+/* Animations */
+.fade-in-up {
+  animation: fadeInUp 0.8s ease forwards;
+  opacity: 0;
+  transform: translateY(30px);
 }
 
-@keyframes fadeInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-50px);
-  }
+@keyframes fadeInUp {
   to {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateY(0);
   }
 }
 
-@keyframes fadeInRight {
-  from {
-    opacity: 0;
-    transform: translateX(50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-/* 响应式调整 */
+/* Responsive */
 @media (max-width: 992px) {
-  .profile-image-container {
-    width: 300px;
-    height: 300px;
+  .hero-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 40px;
   }
 
-  .initials {
-    font-size: 4rem;
+  .hero-text {
+    order: 2;
+  }
+
+  .hero-image {
+    order: 1;
+  }
+
+  .cta-buttons {
+    justify-content: center;
+  }
+
+  .description {
+    margin: 0 auto 40px;
+  }
+
+  .name {
+    font-size: 3rem;
   }
 }
 
 @media (max-width: 768px) {
-  .hero {
-    padding-top: 120px;
-    padding-bottom: 60px;
-  }
-
-  .profile-image-container {
-    width: 250px;
-    height: 250px;
-    margin-top: 30px;
-  }
-
-  .initials {
-    font-size: 3rem;
-  }
-
-  .display-3 {
-    font-size: 2.5rem;
+  .image-wrapper {
+    width: 280px;
+    height: 280px;
   }
 }
 </style>
